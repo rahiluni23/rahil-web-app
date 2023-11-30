@@ -5,6 +5,7 @@ FROM ruby:2.7.0
 ENV RAILS_ROOT /var/www/app_name
 ENV RAILS_ENV production
 ENV NODE_ENV production
+ENV RACK_ENV production
 ENV RAILS_LOG_TO_STDOUT true
 ENV RAILS_SERVE_STATIC_FILES true
 
@@ -21,13 +22,14 @@ RUN apt-get install freetds-dev -y
 
 # Copy Gemfile and install gems
 COPY Gemfile Gemfile.lock ./
-RUN gem install bundler && bundle install --jobs 20 --retry 5
+RUN gem install bundler && bundle install --deployment --without development test --jobs 20 --retry 5
 
 # Copy the rest of the application code
 COPY . .
 RUN echo $RAILS_MASTER_KEY > /var/www/app_name/config/master.key
+
 # Expose port 3000 to the Docker host, so we can access the app
-EXPOSE 8000
+EXPOSE 3000
 
 # Start the Rails server
 CMD ["rails", "server", "-b", "0.0.0.0"]
