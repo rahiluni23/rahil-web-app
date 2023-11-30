@@ -2,7 +2,6 @@
 FROM ruby:2.7.0
 
 # Set environment variables
-ENV RAILS_ROOT /var/www/app_name
 ENV RAILS_ENV production
 ENV NODE_ENV production
 ENV RACK_ENV production

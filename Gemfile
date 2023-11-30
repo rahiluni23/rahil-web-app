@@ -71,3 +71,4 @@ group :test do
 end
 gem 'tiny_tds'
 gem 'activerecord-sqlserver-adapter'
+gem 'dotenv-rails', groups: [:development, :test]
