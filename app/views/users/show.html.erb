@@ -1,0 +1,15 @@
+<!-- app/views/users/show.html.erb -->
+
+<div class="container mt-5">
+  <h1>User Details</h1>
+
+  <dl class="row">
+    <dt class="col-sm-3">Name:</dt>
+    <dd class="col-sm-9"><%= @user.name %></dd>
+
+    <dt class="col-sm-3">Phone Number:</dt>
+    <dd class="col-sm-9"><%= @user.phone_number %></dd>
+  </dl>
+
+  <%= link_to 'Back', users_path, class: 'btn btn-secondary' %>
+</div>

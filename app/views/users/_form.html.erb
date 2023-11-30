@@ -1,0 +1,15 @@
+<%= form_with(model: user, local: true) do |form| %>
+  <div class="form-group">
+    <%= form.label :name, class: 'form-label' %>
+    <%= form.text_field :name, class: 'form-control', placeholder: 'Enter your name', required: true %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :phone_number, class: 'form-label' %>
+    <%= form.text_field :phone_number, class: 'form-control', placeholder: 'Enter your phone number', required: true %>
+  </div>
+
+  <div class="form-group">
+    <%= form.submit 'Submit', class: 'btn btn-primary' %>
+  </div>
+<% end %>
