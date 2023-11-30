@@ -12,20 +12,19 @@ ENV RAILS_SERVE_STATIC_FILES true
 ARG RAILS_MASTER_KEY
 RUN export RAILS_MASTER_KEY=${RAILS_MASTER_KEY}
 
-# Set up the application directory
-RUN mkdir -p $RAILS_ROOT
-WORKDIR $RAILS_ROOT
+WORKDIR /app
 
 # Install dependencies
 RUN apt-get update -qq && apt-get install -y nodejs yarn
 RUN apt-get install freetds-dev -y
 
 # Copy Gemfile and install gems
-COPY Gemfile Gemfile.lock ./
+COPY Gemfile Gemfile.lock /app/
 RUN gem install bundler && bundle install --deployment --without development test --jobs 20 --retry 5
 
 # Copy the rest of the application code
-COPY . .
+COPY . /app/
+RUN bundle exec rails assets:precompile
 RUN echo $RAILS_MASTER_KEY > /var/www/app_name/config/master.key
 
 # Expose port 3000 to the Docker host, so we can access the app
