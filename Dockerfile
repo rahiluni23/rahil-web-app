@@ -25,7 +25,7 @@ RUN gem install bundler && bundle install --deployment --without development tes
 # Copy the rest of the application code
 COPY . /app/
 
-RUN echo $RAILS_MASTER_KEY > /var/www/app_name/config/master.key
+RUN echo $RAILS_MASTER_KEY > /app/config/master.key
 
 # Expose port 3000 to the Docker host, so we can access the app
 EXPOSE 3000
